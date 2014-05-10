@@ -22,14 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.example.fuzzer.DisplayBarcodeActivity"
-            android:label="@string/title_activity_display_barcode"
-            android:parentActivityName="com.example.fuzzer.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.fuzzer.MainActivity" />
-        </activity>
     </application>
 
 </manifest>
