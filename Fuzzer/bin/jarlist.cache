@@ -1,5 +1,5 @@
 # cache for current jar dependency. DO NOT EDIT.
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
-1389983490000 627582 cb6883d96005bc85b3e868f204507ea5b4fa9bbf C:\Users\Jon\workspace\appcompat_v7_2\libs\android-support-v4.jar
-1398634981112 627582 cb6883d96005bc85b3e868f204507ea5b4fa9bbf C:\Users\Jon\workspace\Fuzzer\libs\android-support-v4.jar
+1389983490000 627582 cb6883d96005bc85b3e868f204507ea5b4fa9bbf C:\Users\Jon\Development\adt-bundle-windows-x86_64-20140321\sdk\extras\android\support\v7\appcompat\libs\android-support-v4.jar
+1398634981112 627582 cb6883d96005bc85b3e868f204507ea5b4fa9bbf C:\Users\Jon\Documents\GitHub\barcodefuzzer\Fuzzer\libs\android-support-v4.jar

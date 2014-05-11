@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Small Text"
+        android:text="@string/default_text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <LinearLayout
@@ -43,29 +43,27 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-       <RadioGroup
-           android:id="@+id/barcode_type"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal" >
+        <RadioGroup
+            android:id="@+id/barcode_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
 
             <RadioButton
                 android:id="@+id/qr_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/qr_code"
-                android:onClick="onTypeSelected" />
+                android:onClick="onTypeSelected"
+                android:text="@string/qr_code" />
 
             <RadioButton
                 android:id="@+id/code128_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/code128"
-                android:onClick="onTypeSelected" />
-
+                android:onClick="onTypeSelected"
+                android:text="@string/code128" />
         </RadioGroup>
-
     </LinearLayout>
 
     <LinearLayout
@@ -74,12 +72,11 @@
 
         <Button
             android:id="@+id/button_random"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/button_random"
-            android:onClick="randomToBarcode" />
-
+            android:layout_weight="1"
+            android:onClick="randomToBarcode"
+            android:text="@string/button_random" />
     </LinearLayout>
 
     <LinearLayout
@@ -102,13 +99,72 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="12"
-                android:inputType="number" >
+                android:inputType="number"
+                android:text="12" >
 
                 <requestFocus />
             </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/letter_case"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <CheckBox
+                android:id="@+id/upper_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Uppercase" />
+
+            <CheckBox
+                android:id="@+id/lower_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lowercase" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/num_special"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <CheckBox
+                android:id="@+id/num_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Numbers" />
+
+            <CheckBox
+                android:id="@+id/special_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Special" />
 
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/file_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/edit_file_name"
+            android:ems="10" />
+
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Save Barcode" 
+            android:onClick="saveBarcode" />
 
     </LinearLayout>
 
