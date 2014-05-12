@@ -69,10 +69,10 @@ public class MainActivity extends ActionBarActivity {
 
 	        switch(barcode_type) {
 	        case "@string/qr_code": 
-	        	bitmap = encodeAsBitmap(input, BarcodeFormat.QR_CODE, 300, 150);
+	        	bitmap = encodeAsBitmap(input, BarcodeFormat.QR_CODE, 550, 550);
 	        	break;
 	        case "@string/code_128":
-	        	bitmap = encodeAsBitmap(input, BarcodeFormat.CODE_128, 300, 150);
+	        	bitmap = encodeAsBitmap(input, BarcodeFormat.CODE_128, 550, 550);
 	        	break;
 	        }
 
