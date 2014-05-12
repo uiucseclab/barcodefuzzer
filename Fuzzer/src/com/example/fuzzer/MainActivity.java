@@ -7,6 +7,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Random;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -26,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -91,6 +93,12 @@ public class MainActivity extends ActionBarActivity {
 		final CheckBox lowerBox = (CheckBox) findViewById(R.id.lower_check);
 		final CheckBox numBox = (CheckBox) findViewById(R.id.num_check);
 		final CheckBox specialBox = (CheckBox) findViewById(R.id.special_check);
+		boolean upperBool = false;
+		boolean lowerBool = false;
+		boolean numBool = false;
+		boolean specialBool = false;
+		int max = 2953;
+		CharSequence toastText = "";
 
 		//Setup character space for random generation
 		String lower = "abcdefghijklmnopqurstuvwxyz";
@@ -102,19 +110,56 @@ public class MainActivity extends ActionBarActivity {
 		//Read checkboxes to determine what to add to charspace
 		if (upperBox.isChecked()) {
 			charspace += upper;
+			upperBool = true;
 		}
 		if (lowerBox.isChecked()) {
 			charspace += lower;
+			lowerBool = true;
 		}
 		if (numBox.isChecked()) {
 			charspace += num;
+			numBool = true;
 		}
 		if (specialBox.isChecked()) {
 			charspace += special;
+			specialBool = true;
 		}
 		if (!upperBox.isChecked() && !lowerBox.isChecked() &&
 				!numBox.isChecked() && !specialBox.isChecked()) {
 			charspace = lower;
+		}
+		
+		//Update max based on character set for QR codes
+		if (!specialBool) {
+			max = 4296;
+		}
+		if (numBool && !upperBool && !lowerBool && !specialBool) {
+			max = 7089;
+		}
+		if (barcode_type == "@string/qr_code") {
+			max = 80;
+		}
+		
+		//Compare max to length. Toast user if length > max and return.
+		if (length > max) {
+			if (max == 7089) {
+				toastText = "String length is too long: max for numeric is 7089";
+			}
+			if (max == 4296) {
+				toastText = "String length is too long: max for alphanumeric is 4296";
+			}
+			if (max == 2953) {
+				toastText = "String length is too long: max for special is 2953";
+			}
+			if (max == 80) {
+				toastText = "String length is too long: max for Code128 is 80";
+			}
+			Context context = getApplicationContext();
+			int duration = Toast.LENGTH_SHORT;
+			
+			Toast toast = Toast.makeText(context, toastText, duration);
+			toast.show();
+			return;
 		}
 		
 		char[] chars = charspace.toCharArray();
@@ -195,17 +240,17 @@ public class MainActivity extends ActionBarActivity {
 				
 		//Grab filename from the text field
 		EditText editText = (EditText) findViewById(R.id.file_name);
-		String name = editText.getText().toString();
+		String name = editText.getText().toString().replaceAll("[^a-zA-Z0-9]", "");
 		
 		//Open filestream and write the image
 		String root = Environment.getExternalStorageDirectory().toString();
-	    File myDir = new File(root + "/saved_images");    
+	    File myDir = new File(root + "/BarcodeFuzzer");    
 	    myDir.mkdirs();
 	    Random generator = new Random();
 	    int n = 10000;
 	    n = generator.nextInt(n);
-	    String fnamePic = name + n + ".jpg";
-	    String fnameText = name + n + ".txt";
+	    String fnamePic = name + "-" + n + ".jpg";
+	    String fnameText = name + "-" + n + ".txt";
 	    File filePic = new File (myDir, fnamePic);
 	    if (filePic.exists ()) filePic.delete (); 
 	    try {
@@ -229,6 +274,13 @@ public class MainActivity extends ActionBarActivity {
 	           e.printStackTrace();
 	    }
 		
+	    Context context = getApplicationContext();
+		int duration = Toast.LENGTH_LONG;
+		CharSequence toastText = "Barcode saved to: " + root + "/BarcodeFuzzer/" + fnamePic;
+		
+		Toast toast = Toast.makeText(context, toastText, duration);
+		toast.show();
+	    
 		//Start media scan
 		Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
 		Uri contentUri = Uri.fromFile(filePic);
