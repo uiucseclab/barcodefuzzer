@@ -8,7 +8,7 @@ Features:
   * Save successful barcodes and their associated strings
   
 TODO:
-  * QR codes have a maximum length depending on the characters used, still need to add logic for limiting length based on selected char sets
+  * QR codes have a maximum length depending on the characters used, still need to add logic for limiting length based on selected char sets - DONE
   * Allow for custom character spaces
   * Add option for random mutation of user input strings
   * Add regex string generation for smarter SQL fuzzing
