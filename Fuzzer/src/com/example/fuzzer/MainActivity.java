@@ -136,7 +136,7 @@ public class MainActivity extends ActionBarActivity {
 		if (numBool && !upperBool && !lowerBool && !specialBool) {
 			max = 7089;
 		}
-		if (barcode_type == "@string/qr_code") {
+		if (barcode_type == "@string/code_128") {
 			max = 80;
 		}
 		
